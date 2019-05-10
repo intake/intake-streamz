@@ -18,7 +18,7 @@ requirements:
   run:
     - intake>=0.5
     - python
-    - streamz
+    - streamz>=0.5.1
 
 test:
   source_files:

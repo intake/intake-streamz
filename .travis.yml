@@ -1,14 +1,9 @@
 language: generic
-sudo: required
 os:
 - linux
-services:
-- docker
 env:
   matrix:
   - CONDA_PY=36
-  global:
-    secure: IomW/fLrvlZcn23yVsYWewVJ+HfAHrYDvRqF+2SgFsQ5NwLSOAOCrQLJA89lPrYhZpU5qz8cygbzRcDS8CaW5P/etIXijzjP9PJsy57hjTBQLpRGT6l0U6UpTAceKrbBUEYVZfFT3y7VHzS2ToPn+CCLOkkKTueQH3MNQkoT/7y7iKsICt2CCTIBhnk7ucv32z5vtTQUeJEEsE5A3h8bqYA4V8ncbrsSZH7V38s8j4Zt1BGkAwQmEX4QUroV3lzrvFXgkFWsvzJRKMp6OCyVyi0ug8G7ueXUdTYsV3d82pWPyF6ec7yKWhe0yTXnLlBH4f/YpZT6HWjv7RBUwp3iChVFUP/OTXFNW+1OC+Z2EaRXANsNAg2pWxorb6DMrcmf4pxUHMf6AqYpUorHqREDPICGUSLHbc9UNvGuLE/hgYHf+7yMYYVuI+xtpSf9mTolWzin2HXykj1Kt8Nbcg1g93b8gXpJOqYslC5ZBpwpZ6G/op7X1pAh14QD8pLCJ1EUFCCi2+MwOhmVW0m+dcB0SkrFyZfziv/tuUOxONfGGQpO0U51PMtet7P8kMmcmrvTTWYenP9qnR8Kba/VF8O7RFmZMNcNaZxKouRA9Pj7eMIAhD5smJSTKjbQrfex7ovLkrcK77nLgcWxfu7Up6eMr+BpU68qheii7U9erRT2S48=
 install:
 - |
   echo "Installing a fresh version of Miniconda."
