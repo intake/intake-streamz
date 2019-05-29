@@ -5,7 +5,7 @@ channels:
 dependencies:
   - python=3.6
   - intake
-  - intake-estreamz
+  - intake-streamz
   - pip:
     - sphinx
     - sphinx-rtd-theme
