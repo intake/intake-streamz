@@ -1,0 +1,7 @@
+sources:
+  simple:
+    driver: intake_streamz.source.StreamzSource
+    args:
+      method_chain:
+        - - "from_iterable"
+          - iterable: [1, 2, 3]

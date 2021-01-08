@@ -17,7 +17,8 @@ setup(
     license='BSD',
     py_modules=['intake_streamz'],
     packages=find_packages(),
-    package_data={'': ['*.csv', '*.yml', '*.html']},
+    entry_points={
+        'intake.drivers': ['streamz = intake_streamz.sources:StreamzSource']},
     include_package_data=True,
     install_requires=requires,
     long_description=open('README.md').read(),
