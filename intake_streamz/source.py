@@ -1,5 +1,6 @@
 
 from intake.source.base import DataSource
+from intake.source import import_name
 
 
 class StreamzSource(DataSource):
@@ -19,14 +20,17 @@ class StreamzSource(DataSource):
         self.kwargs = kwargs
         self.stream = None
         self.start = start
-        super().__init__(metadata)
+        super().__init__(metadata=metadata)
 
     def _get_schema(self):
         import streamz
         if self.stream is None:
             stream = streamz.Stream
-            for meth, kw in self.method:
-                stream = getattr(stream, meth)(**kw)
+            for part in self.method:
+                kw = part.get("kwargs", {})
+                for functional in part.get("func_value", []):
+                    kw[functional] = import_name(kw[functional])
+                stream = getattr(stream, part["method"])(**part.get("kwargs", {}))
             self.stream = stream
         if self.start:
             self.stream.start()
@@ -35,3 +39,27 @@ class StreamzSource(DataSource):
     def read(self):
         self._get_schema()
         return self.stream
+
+    def to_dask(self):
+        return self.read().scatter()
+
+    @property
+    def plot(self):
+        # override since there is no hvPlot(streamz), only streamz.hvPlot
+        try:
+            from hvplot import hvPlot
+        except ImportError:
+            raise ImportError("The intake plotting API requires hvplot."
+                              "hvplot may be installed with:\n\n"
+                              "`conda install -c pyviz hvplot` or "
+                              "`pip install hvplot`.")
+        fields = self.metadata.get('fields', {})
+        for attrs in fields.values():
+            if 'range' in attrs:
+                attrs['range'] = tuple(attrs['range'])
+        s = self.read()
+        plot = s.plot
+        plot._metadata['fields'] = fields
+        plot._plots = self.metadata.get('plots', {})
+        s.start()
+        return plot

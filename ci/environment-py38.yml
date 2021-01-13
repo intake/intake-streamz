@@ -6,3 +6,4 @@ dependencies:
   - intake
   - dask
   - streamz
+  - hvplot

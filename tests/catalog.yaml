@@ -3,5 +3,22 @@ sources:
     driver: intake_streamz.source.StreamzSource
     args:
       method_chain:
-        - - "from_iterable"
-          - iterable: [1, 2, 3]
+        - method: from_iterable
+          kwargs:
+            iterable: [1, 2, 3]
+  df:
+    driver: intake_streamz.source.StreamzSource
+    args:
+      method_chain:
+        - method: from_periodic
+          kwargs:
+            callback: streamz.dataframe.core.random_datapoint
+          func_value: ["callback"]
+        - method: to_dataframe
+          kwargs:
+            example: streamz.dataframe.core.random_datapoint
+          func_value: ["example"]
+    metadata:
+      plots:
+        myscatter:
+          kind: scatter
