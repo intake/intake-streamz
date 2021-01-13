@@ -18,7 +18,7 @@ def test_simple():
 def test_dask():
     distr = pytest.importorskip("dask.distributed")
     import streamz.dask
-    with distr.Client():
+    with distr.Client(processes=False):
         cat = intake.open_catalog(catfile)
         s = cat.simple.to_dask()
         assert isinstance(s, streamz.dask.DaskStream)
