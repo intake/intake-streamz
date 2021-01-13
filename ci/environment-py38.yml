@@ -5,5 +5,8 @@ dependencies:
   - python=3.8
   - intake
   - dask
-  - streamz
   - hvplot
+  - pytest
+  - pip
+  - pip:
+      - "git+https://github.com/python-streamz/streamz"
