@@ -52,7 +52,7 @@ sources:
           backlog: 1
           title: CPU Usage
         lately:
-          type: area
+          kind: area
           backlog: 30
           stacked: true
           legend: true
