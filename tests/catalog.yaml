@@ -48,7 +48,7 @@ sources:
     metadata:
       plots:
         now:
-          type: bar
+          kind: bar
           backlog: 1
           title: CPU Usage
         lately:
