@@ -22,3 +22,37 @@ sources:
       plots:
         myscatter:
           kind: scatter
+
+  cpu:
+    driver: streamz
+    args:
+      method_chain:
+        - method: from_periodic
+          kwargs:
+            callback: psutil.cpu_times_percent
+            poll_interval: 1
+          func_value: ["callback"]
+        - method: map
+          kwargs:
+            func: pandas.DataFrame
+            columns: ["CPU"]
+          func_value: ["func"]
+        - method: map
+          kwargs:
+            func: pandas:DataFrame.transpose
+          func_value: ['func']
+        - method: to_dataframe
+          kwargs:
+            example: {0: [0], 1: [0], 2: [0], 3: [0]}
+
+    metadata:
+      plots:
+        now:
+          kind: bar
+          backlog: 1
+          title: CPU Usage
+        lately:
+          kind: area
+          backlog: 30
+          stacked: true
+          legend: true
